@@ -1,0 +1,11 @@
+FROM golang as ex
+COPY app.go /go/src/app/
+ENV GO111MODULE=auto
+WORKDIR /go/src/app/
+RUN go build -o app.go .
+
+FROM alpine 
+WORKDIR /appexec
+COPY --from=ex /go/src/app ./
+RUN chmod -R 755 /appexec
+ENTRYPOINT ./app.go

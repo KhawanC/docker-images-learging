@@ -1,0 +1,4 @@
+FROM ubuntu
+RUN apt update && apt upgrade -y && apt install python3 -y && apt clean
+COPY app.py /opt/app.py
+CMD python3 /opt/app.py 
